@@ -55,21 +55,3 @@ def acquire_zillow(use_cache=True):
     df.to_csv('zillow.csv', index=False)
    
     return df
-
-
-
-def missing_values(df):
-    missing_values =pd.concat([
-                    df.isna().sum().rename('count'),
-                    df.isna().mean().rename('percent')
-                    ], axis=1)
-    return missing_values
-
-
-
-def missing_counts_and_percents(df):
-    missing_counts_and_percents = pd.concat([
-                                  df.isna().sum(axis=1).rename('num_cols_missing'),
-                                  df.isna().mean(axis=1).rename('percent_cols_missing'),
-                                  ], axis=1).value_counts().sort_index()
-    return pd.DataFrame(missing_counts_and_percents).reset_index()
